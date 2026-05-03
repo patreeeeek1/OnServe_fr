@@ -1,0 +1,90 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_back_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="9dp"
+        android:src="@drawable/ic_back_arrow"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What are your\nareas of expertise?"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/navy_onserve"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select all that apply."
+        android:textSize="18sp"
+        android:textColor="#666666"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"/>
+
+    <!-- Expertise Cards -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/card_selection_bg"
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:layout_marginBottom="15dp">
+        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/blue_onserve" android:checked="true"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Electrical" android:textSize="20sp" android:textColor="@color/blue_onserve" android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/card_selection_bg"
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:layout_marginBottom="15dp">
+        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/blue_onserve" android:checked="true"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Plumbing" android:textSize="20sp" android:textColor="@color/blue_onserve" android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/card_selection_bg"
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:layout_marginBottom="15dp">
+        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/blue_onserve" android:checked="true"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="IT Support" android:textSize="20sp" android:textColor="@color/blue_onserve" android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center_vertical"
+        android:padding="15dp">
+        <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/navy_onserve"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Others" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <android.widget.Button
+        android:id="@+id/btn_create_account"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:text="Create Account"
+        android:textAllCaps="false"
+        android:background="@drawable/button_navy_rounded"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

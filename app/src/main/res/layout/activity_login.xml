@@ -1,0 +1,105 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_back_arrow"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="9dp"
+        android:src="@drawable/ic_back_arrow"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log in"
+        android:layout_gravity="center_horizontal"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/navy_onserve" />
+
+    <!-- Toggle Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/toggle_bg"
+        android:padding="4dp">
+        <TextView
+            android:id="@+id/tv_user_toggle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/input_rounded"
+            android:gravity="center"
+            android:text="User"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/navy_onserve"/>
+        <TextView
+            android:id="@+id/tv_volunteer_toggle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Volunteer"
+            android:clickable="true"
+            android:focusable="true"
+            android:textColor="@color/navy_onserve"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email or Mobile Number"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/navy_onserve"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/et_login_email"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Email"
+        android:paddingLeft="15dp"
+        android:background="@drawable/input_rounded"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/navy_onserve"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/et_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="8dp"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:background="@drawable/input_rounded"/>
+
+    <android.widget.Button
+        android:id="@+id/btn_login_submit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
+        android:text="Log in"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:background="@drawable/button_navy_rounded"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

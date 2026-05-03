@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">OnServe</string>
+    <string name="app_name_on">On</string>
+    <string name="app_name_serve">Serve</string>
+    <string name="slogan">“Immediate Aid for Urgent Needs”</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="logo_description">App Logo</string>
+    <string name="logout">Logout</string>
+</resources>
