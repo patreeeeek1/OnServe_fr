@@ -33,6 +33,7 @@ class VolunteerHomeActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     
     private val selectedSlots = mutableSetOf<Int>() // Hour of day (8-19)
+    private val lockedSlots = mutableSetOf<Int>() // Slots that have assigned tasks
     private val allSlots = (8..19).toList() // 8 AM to 7 PM start times
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,13 +77,26 @@ class VolunteerHomeActivity : AppCompatActivity() {
                 
                 tv.text = "$start - $end"
 
-                if (selectedSlots.contains(hour)) {
+                val isLocked = lockedSlots.contains(hour)
+                
+                if (isLocked) {
+                    tv.setBackgroundResource(R.drawable.card_selection_bg) // Or a different "locked" drawable if available
+                    tv.alpha = 0.5f
+                    tv.text = "$start - $end (Assigned)"
+                } else if (selectedSlots.contains(hour)) {
                     tv.setBackgroundResource(R.drawable.card_selected_highlight)
+                    tv.alpha = 1.0f
                 } else {
                     tv.setBackgroundResource(R.drawable.card_selection_bg)
+                    tv.alpha = 1.0f
                 }
 
                 tv.setOnClickListener {
+                    if (isLocked) {
+                        Toast.makeText(this@VolunteerHomeActivity, "This slot is locked due to an assigned task.", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
                     if (selectedSlots.contains(hour)) {
                         selectedSlots.remove(hour)
                     } else {
@@ -117,15 +131,33 @@ class VolunteerHomeActivity : AppCompatActivity() {
         val email = getSharedPreferences("OnServePrefs", MODE_PRIVATE).getString("USER_EMAIL", "") ?: ""
         if (email.isEmpty()) return
 
-        db.collection("volunteer_availability").document("${email}_${date}").get()
-            .addOnSuccessListener { doc ->
-                selectedSlots.clear()
-                if (doc.exists()) {
-                    val slots = doc.get("slots") as? List<Long>
-                    slots?.forEach { selectedSlots.add(it.toInt()) }
+        // 1. Fetch assigned tasks to lock those slots
+        db.collection("requests")
+            .whereEqualTo("volunteerEmail", email)
+            .whereEqualTo("scheduledDate", date)
+            .whereIn("status", listOf("Assigned", "In Progress"))
+            .get()
+            .addOnSuccessListener { tasks ->
+                lockedSlots.clear()
+                tasks.documents.forEach { doc ->
+                    val hour = doc.getLong("slotHour")?.toInt()
+                    if (hour != null) lockedSlots.add(hour)
                 }
-                tvSlotsCount.text = "Selected: ${selectedSlots.size}/5 slots"
-                rvSlots.adapter?.notifyDataSetChanged()
+                
+                // 2. Fetch volunteer's intended availability
+                db.collection("volunteer_availability").document("${email}_${date}").get()
+                    .addOnSuccessListener { doc ->
+                        selectedSlots.clear()
+                        if (doc.exists()) {
+                            val slots = doc.get("slots") as? List<Long>
+                            slots?.forEach { selectedSlots.add(it.toInt()) }
+                        }
+                        // Ensure locked slots are also shown as selected
+                        selectedSlots.addAll(lockedSlots)
+                        
+                        tvSlotsCount.text = "Selected: ${selectedSlots.size}/5 slots"
+                        rvSlots.adapter?.notifyDataSetChanged()
+                    }
             }
     }
 

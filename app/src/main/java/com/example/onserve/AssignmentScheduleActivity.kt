@@ -17,6 +17,7 @@ class AssignmentScheduleActivity : AppCompatActivity() {
 
     private lateinit var rvSchedule: RecyclerView
     private lateinit var tvTasksCount: TextView
+    private lateinit var tvEmpty: TextView
     private lateinit var adapter: ScheduleAdapter
     private val db = FirebaseFirestore.getInstance()
     private val taskList = mutableListOf<Map<String, Any>>()
@@ -27,6 +28,7 @@ class AssignmentScheduleActivity : AppCompatActivity() {
 
         findViewById<FrameLayout>(R.id.btn_back_schedule).setOnClickListener { finish() }
         tvTasksCount = findViewById(R.id.tv_tasks_count)
+        tvEmpty = findViewById(R.id.tv_empty_schedule)
 
         rvSchedule = findViewById(R.id.rv_assignment_schedule)
         rvSchedule.layoutManager = LinearLayoutManager(this)
@@ -62,32 +64,34 @@ class AssignmentScheduleActivity : AppCompatActivity() {
         val email = getSharedPreferences("OnServePrefs", MODE_PRIVATE).getString("USER_EMAIL", "") ?: ""
         if (email.isEmpty()) return
 
-        // Fetching tasks assigned to this volunteer that are NOT done yet
+        val todayStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+        // Fetching tasks assigned to this volunteer that are NOT done yet and scheduled for TODAY
         db.collection("requests")
             .whereEqualTo("volunteerEmail", email)
+            .whereEqualTo("scheduledDate", todayStr)
             .whereIn("status", listOf("Assigned", "In Progress"))
             .addSnapshotListener { snapshot, e ->
                 if (e != null) return@addSnapshotListener
 
                 taskList.clear()
-                var todayCount = 0
-                val todayStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-
                 snapshot?.documents?.forEach { doc ->
                     val data = doc.data?.toMutableMap() ?: mutableMapOf()
                     data["docId"] = doc.id
                     taskList.add(data)
-
-                    val scheduledDate = data["scheduledDate"] as? String
-                    if (scheduledDate == todayStr) {
-                        todayCount++
-                    }
                 }
                 
-                tvTasksCount.text = "Tasks assigned today: $todayCount / 5"
+                tvTasksCount.text = "Tasks assigned today: ${taskList.size} / 5"
                 
-                // Sort by scheduled date and time if available
-                taskList.sortBy { it["scheduledDate"] as? String ?: "" }
+                if (taskList.isEmpty()) {
+                    tvEmpty.visibility = View.VISIBLE
+                    rvSchedule.visibility = View.GONE
+                } else {
+                    tvEmpty.visibility = View.GONE
+                    rvSchedule.visibility = View.VISIBLE
+                    // Sort by time
+                    taskList.sortBy { it["slotHour"] as? Long ?: 0L }
+                }
                 
                 adapter.notifyDataSetChanged()
             }

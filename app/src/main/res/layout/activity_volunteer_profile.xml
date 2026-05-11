@@ -219,7 +219,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Availability"
+                android:text="Manage"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -241,7 +241,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Schedule"
+                android:text="Today"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>

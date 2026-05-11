@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Assignment Schedule"
+            android:text="Today's Schedule"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -72,6 +72,18 @@
         android:clipToPadding="false"
         android:paddingBottom="20dp" />
 
+    <TextView
+        android:id="@+id/tv_empty_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="SYSTEM_IDLE: No tasks dispatched for current time slot."
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:padding="20dp" />
+
     <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/bottom_nav_volunteer"
@@ -101,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Availability"
+                android:text="Manage"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -123,7 +135,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Schedule"
+                android:text="Today"
                 android:textColor="@color/navy_onserve"
                 android:textSize="10sp" />
         </LinearLayout>

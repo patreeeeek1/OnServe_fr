@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -166,7 +167,7 @@ class AdminPendingRequestsActivity : AppCompatActivity() {
                                         try {
                                             val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
                                             val d = sdf.parse(reqTimeStr)
-                                            val cal = Calendar.getInstance().apply { time = d }
+                                            val cal = Calendar.getInstance().apply { time = d!! }
                                             val start = sdf.format(cal.time)
                                             cal.add(Calendar.HOUR_OF_DAY, 1)
                                             val end = sdf.format(cal.time)
