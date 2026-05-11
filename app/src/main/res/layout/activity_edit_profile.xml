@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/navy_onserve"
+        android:paddingHorizontal="16dp">
+
+        <FrameLayout
+            android:id="@+id/btn_back_container"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_back_arrow"
+                app:tint="@color/white" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Edit Profile"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                android:text="Select an item to update"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp" />
+
+            <!-- Change Name Button -->
+            <android.widget.Button
+                android:id="@+id/btn_change_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/card_white_rounded"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="Change Name"
+                android:textAllCaps="false"
+                android:textColor="@color/navy_onserve"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Change Phone Number Button -->
+            <android.widget.Button
+                android:id="@+id/btn_change_phone"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/card_white_rounded"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="Change Phone Number"
+                android:textAllCaps="false"
+                android:textColor="@color/navy_onserve"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Change Email Address Button -->
+            <android.widget.Button
+                android:id="@+id/btn_change_email"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/card_white_rounded"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="Change Email Address"
+                android:textAllCaps="false"
+                android:textColor="@color/navy_onserve"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Change Address Button -->
+            <android.widget.Button
+                android:id="@+id/btn_change_address"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/card_white_rounded"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="Change Address"
+                android:textAllCaps="false"
+                android:textColor="@color/navy_onserve"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Change Password Button -->
+            <android.widget.Button
+                android:id="@+id/btn_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/card_white_rounded"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:text="Change Password"
+                android:textAllCaps="false"
+                android:textColor="@color/navy_onserve"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

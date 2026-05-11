@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_back_arrow"
+            app:tint="@color/navy_onserve" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Terms &amp; Conditions"
+            android:textColor="@color/navy_onserve"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_agree"
+        android:layout_below="@id/header"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please read the Terms &amp; Conditions carefully before using OnServe."
+                android:textColor="@color/navy_onserve"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="1. Use of the App"
+                android:textColor="@color/navy_onserve"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="By using OnServe, you agree to use the app only for lawful purposes and in accordance with these terms."
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="2. User Responsibilities"
+                android:textColor="@color/navy_onserve"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="You agree to provide accurate information and use the app responsibly."
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="3. Location Access"
+                android:textColor="@color/navy_onserve"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Location access is required to match requests with nearby volunteers and improve response time."
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="4. Data Privacy"
+                android:textColor="@color/navy_onserve"
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="We value your privacy. Your data will be used only for providing services within the app."
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cb_terms_inner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/navy_onserve"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I have read and agree to the Terms &amp; Conditions"
+                    android:textColor="@color/navy_onserve"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <android.widget.Button
+        android:id="@+id/btn_agree"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="24dp"
+        android:background="@drawable/button_navy_rounded"
+        android:text="I Agree"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -11,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.onserve"
+        applicationId = "com.slu.onserve"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -40,6 +41,16 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.material)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.google.places)
+    
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="30dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_check_circle"
+        android:layout_marginBottom="40dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Account Created\nSuccessfully!"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/navy_onserve"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to OnServe!"
+        android:textSize="18sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="60dp"/>
+
+    <android.widget.Button
+        android:id="@+id/btn_go_to_dashboard"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Go to Dashboard"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_navy_rounded"/>
+
+</LinearLayout>

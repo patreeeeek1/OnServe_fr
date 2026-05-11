@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.PICK" />
+            <data android:mimeType="image/*" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +27,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnServe">
 
+        <activity android:name=".AdminDashboardActivity" />
+        <activity android:name=".AdminPendingRequestsActivity" />
+        <activity android:name=".AdminActiveRequestsActivity" />
+        <activity android:name=".AdminWaitingQueueActivity" />
+        <activity android:name=".PriorityOverviewActivity" />
+        <activity android:name=".AdminHistoryActivity" />
+        <activity android:name=".VolunteerHomeActivity" />
+        <activity android:name=".AssignmentScheduleActivity" />
+        <activity android:name=".VolunteerProfileActivity" />
+        <activity android:name=".VolunteerListActivity" />
+        <activity android:name=".RequestHistoryActivity" />
+        <activity android:name=".AvailableTasksActivity" />
+        <activity android:name=".ActiveTasksActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -20,6 +51,27 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".DashboardActivity" />
+        <activity android:name=".SuccessActivity" />
+        <activity android:name=".UserHomeActivity" />
+        <activity android:name=".RequestHelpActivity" />
+        <activity android:name=".RequestsActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".TermsConditionsActivity" />
+        <activity android:name=".EditProfileActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCYTs1IOxXsRVzBEdgFFtcPdc-NGMoZQcw" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 

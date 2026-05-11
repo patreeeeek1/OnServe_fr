@@ -40,5 +40,19 @@
             android:textSize="18sp"
             android:textColor="@color/navy_onserve"
             android:background="@drawable/button_outline_navy" />
+
+        <TextView
+            android:id="@+id/tv_admin_login_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="I am an admin"
+            android:textColor="@color/blue_onserve"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:background="?attr/selectableItemBackground" />
     </LinearLayout>
 </LinearLayout>

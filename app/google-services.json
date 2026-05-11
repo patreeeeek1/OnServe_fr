@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "521526925287",
+    "firebase_url": "https://onserve-database-5308d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "onserve-database-5308d",
+    "storage_bucket": "onserve-database-5308d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521526925287:android:86c32445797d2db4874f42",
+        "android_client_info": {
+          "package_name": "com.slu.onserve"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVDREnYdJ7aR3_C-LxGlzNzCniZVERVRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

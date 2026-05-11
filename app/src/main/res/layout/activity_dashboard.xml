@@ -1,90 +1,265 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="30dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/iv_back_arrow"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:padding="9dp"
-        android:src="@drawable/ic_back_arrow"
-        android:layout_marginTop="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackgroundBorderless"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="What are your\nareas of expertise?"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="@color/navy_onserve"
-        android:layout_marginTop="40dp"/>
+        android:orientation="vertical"
+        android:padding="30dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select all that apply."
-        android:textSize="18sp"
-        android:textColor="#666666"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"/>
+        <ImageView
+            android:id="@+id/iv_back_arrow"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="9dp"
+            android:src="@drawable/ic_back_arrow"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
 
-    <!-- Expertise Cards -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/card_selection_bg"
-        android:gravity="center_vertical"
-        android:padding="15dp"
-        android:layout_marginBottom="15dp">
-        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/blue_onserve" android:checked="true"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Electrical" android:textSize="20sp" android:textColor="@color/blue_onserve" android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What are your\nareas of expertise?"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/navy_onserve"
+            android:layout_marginTop="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select all that apply."
+            android:textSize="18sp"
+            android:textColor="#666666"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"/>
+
+        <!-- Expertise Cards -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_electrical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Electrical" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_plumbing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Plumbing" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_it_support"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="IT Support" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_first_aid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="First Aid" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_medical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Medical Professional" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_manual_labor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Manual Labor" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_vehicle_transport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vehicle Transport" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Delivery &amp; Distribution" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_debris"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Debris Cleaning" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_communications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Communications" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <!-- Others Checkbox -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_vertical"
+            android:padding="15dp">
+            <CheckBox
+                android:id="@+id/cb_others"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Others" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <!-- Container for Other Expertise Inputs -->
+        <LinearLayout
+            android:id="@+id/layout_others_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <EditText
+                    android:id="@+id/et_other_expertise"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:hint="Specify expertise"
+                    android:inputType="textPersonName"
+                    android:autofillHints="name"
+                    android:background="@drawable/input_rounded"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"/>
+
+                <ImageButton
+                    android:id="@+id/btn_add_other"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_input_add"
+                    android:background="@drawable/button_navy_rounded"
+                    android:tint="@color/white"
+                    android:contentDescription="Add more"/>
+            </LinearLayout>
+
+            <!-- Dynamically added EditTexts will go here -->
+            <LinearLayout
+                android:id="@+id/layout_dynamic_others"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+        </LinearLayout>
+
+        <android.widget.Button
+            android:id="@+id/btn_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:text="Create Account"
+            android:textAllCaps="false"
+            android:background="@drawable/button_navy_rounded"
+            android:textColor="@color/white"/>
+
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/card_selection_bg"
-        android:gravity="center_vertical"
-        android:padding="15dp"
-        android:layout_marginBottom="15dp">
-        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/blue_onserve" android:checked="true"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Plumbing" android:textSize="20sp" android:textColor="@color/blue_onserve" android:layout_marginLeft="10dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/card_selection_bg"
-        android:gravity="center_vertical"
-        android:padding="15dp"
-        android:layout_marginBottom="15dp">
-        <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/blue_onserve" android:checked="true"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="IT Support" android:textSize="20sp" android:textColor="@color/blue_onserve" android:layout_marginLeft="10dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:gravity="center_vertical"
-        android:padding="15dp">
-        <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:buttonTint="@color/navy_onserve"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Others" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
-    </LinearLayout>
-
-    <android.widget.Button
-        android:id="@+id/btn_create_account"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:text="Create Account"
-        android:textAllCaps="false"
-        android:background="@drawable/button_navy_rounded"
-        android:textColor="@color/white"/>
-
-</LinearLayout>
+</ScrollView>

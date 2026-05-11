@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/card_white_rounded"
+    android:elevation="2dp"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_task_priority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/card_selected_highlight"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:text="P1: Emergency"
+            android:textColor="@color/blue_onserve"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_task_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Electrical Issue"
+            android:textColor="@color/navy_onserve"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_task_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Description..."
+        android:textColor="@color/navy_onserve"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/layout_task_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="@color/gray_border" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date &amp; Time Submitted"
+            android:textColor="@color/text_gray"
+            android:textSize="11sp" />
+        <TextView
+            android:id="@+id/tv_task_submitted_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oct 24, 2023"
+            android:textColor="@color/navy_onserve"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Requesting User"
+            android:textColor="@color/text_gray"
+            android:textSize="11sp" />
+        <TextView
+            android:id="@+id/tv_task_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textColor="@color/navy_onserve"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Location"
+            android:textColor="@color/text_gray"
+            android:textSize="11sp" />
+        <TextView
+            android:id="@+id/tv_task_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location address"
+            android:textColor="@color/navy_onserve"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_task_show_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:text="Show more"
+        android:textColor="@color/blue_onserve"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <android.widget.Button
+        android:id="@+id/btn_accept_task"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_navy_rounded"
+        android:text="Accept Task"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+</LinearLayout>

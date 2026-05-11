@@ -4,6 +4,10 @@
     <color name="dark_blue">#18263a</color>
     <color name="blue_onserve">#26ace1</color>
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="gray_border">#E0E0E0</color>
     <color name="light_gray_bg">#F2F2F2</color>
+    <color name="red_emergency">#C62828</color>
+    <color name="light_red_bg">#FFF5F5</color>
+    <color name="text_gray">#666666</color>
 </resources>

@@ -5,97 +5,105 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import java.io.BufferedReader
-import java.io.FileInputStream
-
-import android.graphics.Typeface
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var db: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        db = FirebaseFirestore.getInstance()
 
         val backArrow: ImageView = findViewById(R.id.iv_back_arrow)
         backArrow.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        val tvUser: TextView = findViewById(R.id.tv_user_toggle)
-        val tvVolunteer: TextView = findViewById(R.id.tv_volunteer_toggle)
-
-        tvUser.setOnClickListener {
-            // Update UI for User selection
-            tvUser.setBackgroundResource(R.drawable.input_rounded)
-            tvUser.setTypeface(null, Typeface.BOLD)
-            
-            tvVolunteer.background = null
-            tvVolunteer.setTypeface(null, Typeface.NORMAL)
-        }
-
-        tvVolunteer.setOnClickListener {
-            // Update UI for Volunteer selection
-            tvVolunteer.setBackgroundResource(R.drawable.input_rounded)
-            tvVolunteer.setTypeface(null, Typeface.BOLD)
-            
-            tvUser.background = null
-            tvUser.setTypeface(null, Typeface.NORMAL)
-        }
-
         val etEmail: EditText = findViewById(R.id.et_login_email)
         val etPassword: EditText = findViewById(R.id.et_login_password)
         val btnSubmit: Button = findViewById(R.id.btn_login_submit)
+        val tvAdminLogin: android.widget.TextView = findViewById(R.id.tv_admin_login)
+
+        tvAdminLogin.setOnClickListener {
+            showAdminPasswordDialog()
+        }
 
         btnSubmit.setOnClickListener {
             val inputEmail = etEmail.text.toString().trim()
             val inputPassword = etPassword.text.toString().trim()
 
-            if (checkCredentials(inputEmail, inputPassword)) {
-                val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "Invalid Email or Password",
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (inputEmail.isEmpty() || inputPassword.isEmpty()) {
+                DialogUtils.showErrorDialog(this, "Incomplete Form", "Please fill in all fields.")
+                return@setOnClickListener
             }
+
+            if (!NetworkUtils.isNetworkAvailable(this)) {
+                DialogUtils.showErrorDialog(this, "Network Error", "No internet connection detected.")
+                return@setOnClickListener
+            }
+
+            // Manually check central database for matching email and password
+            db.collection("users").document(inputEmail).get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val savedPassword = document.getString("password")
+                        if (savedPassword == inputPassword) {
+                            val user = document.toObject(User::class.java)
+                            if (user != null) {
+                                // Remember current user email for this session
+                                val prefs = getSharedPreferences("OnServePrefs", MODE_PRIVATE)
+                                prefs.edit().putString("USER_EMAIL", inputEmail).apply()
+
+                                if (user.type == "User") {
+                                    startActivity(Intent(this, UserHomeActivity::class.java))
+                                } else if (user.type == "Volunteer") {
+                                    startActivity(Intent(this, VolunteerHomeActivity::class.java))
+                                } else {
+                                    DialogUtils.showErrorDialog(this, "Login Info", "Logged in as ${user.type}")
+                                    startActivity(Intent(this, UserHomeActivity::class.java))
+                                }
+                                finish()
+                            }
+                        } else {
+                            DialogUtils.showErrorDialog(this, "Invalid Credentials", "The email or password you entered is incorrect.")
+                        }
+                    } else {
+                        DialogUtils.showErrorDialog(this, "Account Not Found", "The email address you entered is not registered.")
+                    }
+                }
+                .addOnFailureListener { e ->
+                    DialogUtils.showErrorDialog(this, "System Error", e.message ?: "An unexpected error occurred.")
+                }
         }
     }
 
-    //
-    private fun checkCredentials(email: String, password: String): Boolean {
-        try {
-            val fIn: FileInputStream = openFileInput("students.csv")
-            val reader: BufferedReader = BufferedReader(java.io.InputStreamReader(fIn))
-            var line: String?
+    private fun showAdminPasswordDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Admin Login")
+        builder.setMessage("Enter Admin Password")
 
+        val input = EditText(this)
+        input.inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+        builder.setView(input)
 
-            while ((reader.readLine().also { line = it }) != null) {
-
-                val parts: Array<String?> =
-                    line!!.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-                if (parts.size >= 3) {
-
-                    val savedEmail = parts[1]!!.trim { it <= ' ' }
-                    val savedPassword = parts[2]!!.trim { it <= ' ' }
-
-
-                    if (email == savedEmail && password == savedPassword) {
-                        reader.close()
-                        return true
-                    }
-                }
+        builder.setPositiveButton("Login") { dialog, _ ->
+            val password = input.text.toString()
+            if (password == "12345") {
+                startActivity(Intent(this, AdminDashboardActivity::class.java))
+                finish()
+            } else {
+                DialogUtils.showErrorDialog(this, "Incorrect Password", "The password you entered is incorrect.")
             }
-            reader.close()
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
+            dialog.dismiss()
         }
-        return false
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+
+        builder.show()
     }
 }

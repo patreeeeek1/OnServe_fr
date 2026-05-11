@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_white_rounded"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_margin="20dp">
+
+    <ImageView
+        android:id="@+id/iv_info_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@android:drawable/ic_dialog_info"
+        android:contentDescription="Info" />
+
+    <TextView
+        android:id="@+id/tv_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Notice"
+        android:textColor="@color/navy_onserve"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_info_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Please check your input."
+        android:textColor="@color/text_gray"
+        android:textSize="14sp" />
+
+    <android.widget.Button
+        android:id="@+id/btn_info_ok"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button_navy_rounded"
+        android:text="OK"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+</LinearLayout>

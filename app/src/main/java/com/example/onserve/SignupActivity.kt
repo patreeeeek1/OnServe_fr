@@ -1,22 +1,29 @@
 package com.example.onserve
 
-import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import java.io.FileOutputStream
-import java.io.OutputStreamWriter
-
+import android.content.Intent
 import android.graphics.Typeface
-import android.widget.TextView
+import android.os.Bundle
+import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignupActivity : AppCompatActivity() {
+    private var isVolunteer = false
+    private lateinit var db: FirebaseFirestore
+
+    private val termsResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val cbAgree: CheckBox = findViewById(R.id.cb_agree_terms)
+            cbAgree.isChecked = true
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
+        db = FirebaseFirestore.getInstance()
 
         val backArrow: ImageView = findViewById(R.id.iv_back_arrow)
         backArrow.setOnClickListener {
@@ -27,6 +34,7 @@ class SignupActivity : AppCompatActivity() {
         val tvVolunteer: TextView = findViewById(R.id.tv_volunteer_toggle)
 
         tvUser.setOnClickListener {
+            isVolunteer = false
             tvUser.setBackgroundResource(R.drawable.input_rounded)
             tvUser.setTypeface(null, Typeface.BOLD)
             tvVolunteer.background = null
@@ -34,51 +42,77 @@ class SignupActivity : AppCompatActivity() {
         }
 
         tvVolunteer.setOnClickListener {
+            isVolunteer = true
             tvVolunteer.setBackgroundResource(R.drawable.input_rounded)
             tvVolunteer.setTypeface(null, Typeface.BOLD)
             tvUser.background = null
             tvUser.setTypeface(null, Typeface.NORMAL)
         }
 
-        val etName: EditText = findViewById(R.id.et_signup_name)
+        val etFirstName: EditText = findViewById(R.id.et_signup_first_name)
+        val etLastName: EditText = findViewById(R.id.et_signup_last_name)
         val etEmail: EditText = findViewById(R.id.et_signup_email)
+        val etPhone: EditText = findViewById(R.id.et_signup_phone)
+        val etAddress: EditText = findViewById(R.id.et_signup_address)
         val etPassword: EditText = findViewById(R.id.et_signup_password)
         val btnSubmit: Button = findViewById(R.id.btn_signup_submit)
+        val cbAgree: CheckBox = findViewById(R.id.cb_agree_terms)
+        val tvTermsLink: TextView = findViewById(R.id.tv_terms_link)
+
+        tvTermsLink.setOnClickListener {
+            val intent = Intent(this, TermsConditionsActivity::class.java)
+            termsResultLauncher.launch(intent)
+        }
 
         btnSubmit.setOnClickListener {
-            val name = etName.text.toString()
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
+            val firstName = etFirstName.text.toString().trim()
+            val lastName = etLastName.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            val phone = etPhone.text.toString().trim()
+            val address = etAddress.text.toString().trim()
+            val password = etPassword.text.toString().trim()
 
-            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                saveToCSV(name, email, password)
+            if (!cbAgree.isChecked) {
+                DialogUtils.showErrorDialog(this, "Terms & Conditions", "You must agree to the terms and conditions to proceed.")
+                return@setOnClickListener
+            }
+
+            if (firstName.isNotEmpty() && lastName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() && phone.isNotEmpty() && address.isNotEmpty()) {
+                
+                if (!NetworkUtils.isNetworkAvailable(this)) {
+                    DialogUtils.showErrorDialog(this, "Network Error", "No internet connection detected. Please check your signal and try again.")
+                    return@setOnClickListener
+                }
+
+                val fullName = "$firstName $lastName"
+                val user = User(fullName, email, password, if (isVolunteer) "Volunteer" else "User", phone, address)
+                
+                // Use email as the unique ID for simplicity without Auth UID
+                if (isVolunteer) {
+                    val intent = Intent(this, DashboardActivity::class.java)
+                    intent.putExtra("NAME", fullName)
+                    intent.putExtra("EMAIL", email)
+                    intent.putExtra("PASSWORD", password)
+                    intent.putExtra("PHONE", phone)
+                    intent.putExtra("ADDRESS", address)
+                    startActivity(intent)
+                } else {
+                    saveUserToFirestore(email, user)
+                }
             } else {
-                Toast.makeText(
-                    this@SignupActivity,
-                    "Please fill all fields",
-                    Toast.LENGTH_SHORT
-                ).show()
+                DialogUtils.showErrorDialog(this, "Incomplete Form", "Please fill in all the required fields to create your account.")
             }
         }
     }
 
-
-    private fun saveToCSV(name: String?, email: String?, password: String?) {
-        try {
-
-            val fOut: FileOutputStream = openFileOutput("students.csv", MODE_APPEND)
-            val osw: OutputStreamWriter = OutputStreamWriter(fOut)
-
-
-            osw.write(name + "," + email + "," + password + "\n")
-            osw.flush()
-            osw.close()
-
-            Toast.makeText(this, "Account Created!", Toast.LENGTH_SHORT).show()
-            finish()
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-            Toast.makeText(this, "Error saving data", Toast.LENGTH_SHORT).show()
-        }
+    private fun saveUserToFirestore(email: String, user: User) {
+        db.collection("users").document(email).set(user)
+            .addOnSuccessListener {
+                startActivity(Intent(this, SuccessActivity::class.java))
+                finish()
+            }
+            .addOnFailureListener { e ->
+                DialogUtils.showErrorDialog(this, "Registration Failed", e.message ?: "Could not complete registration.")
+            }
     }
 }

@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Step Indicator -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_step_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Step 1 of 3"
+                android:textColor="@color/text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_emergency_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EMERGENCY"
+                android:textColor="@color/red_emergency"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_step_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Choose Issue Type"
+                android:textColor="@color/navy_onserve"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Step 1: Choose Issue Type -->
+            <ScrollView
+                android:id="@+id/layout_step1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:text="What type of help do you need?"
+                        android:textColor="@color/navy_onserve"
+                        android:textSize="18sp" />
+
+                    <!-- Options -->
+                    <LinearLayout
+                        android:id="@+id/option_electrical"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_electrical"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_electrical"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Electrical Issue"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Wiring, power, outlets"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_plumbing"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_plumbing"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_plumbing"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Plumbing Issue"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Leak, pipes, water supply"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_structural"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_structural"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_home"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Structural / Debris"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Clear fallen trees, roof damage, or blocked paths"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_food"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_food"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_food"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Food &amp; Supplies"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Non-perishable food, cooking fuel, or essential kits"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_medical"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_medical"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_medical"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Medical / First Aid"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="First aid supplies, medication, or wellness checks"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_welfare"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_medical"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_profile"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Welfare Check"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Physically check on neighbors or elderly relatives"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_transport"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_other"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_location"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Transportation / Extraction"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Blocked roads or damaged vehicle; need transport"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_other"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_other"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Other"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Other miscellaneous issues"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_other_problem_step1"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:visibility="gone"
+                        android:hint="Specify your problem"
+                        android:paddingLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/input_rounded"/>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- Step 2: Describe the Problem -->
+            <ScrollView
+                android:id="@+id/layout_step2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="What happened?"
+                        android:textColor="@color/navy_onserve"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:padding="10dp">
+
+                        <EditText
+                            android:id="@+id/et_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="top"
+                            android:hint="Briefly describe the problem (e.g., exposed wire, gas smell, leaking pipe, etc.)"
+                            android:inputType="textMultiLine"
+                            android:textColor="@color/navy_onserve"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_char_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:text="0/200"
+                            android:textColor="@color/text_gray"
+                            android:textSize="12sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:text="Is someone in danger?"
+                        android:textColor="@color/navy_onserve"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_danger"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_danger_yes"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/card_white_rounded"
+                            android:buttonTint="@color/red_emergency"
+                            android:padding="15dp"
+                            android:text="Yes\nSomeone is in immediate danger"
+                            android:textColor="@color/navy_onserve" />
+
+                        <RadioButton
+                            android:id="@+id/rb_danger_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:background="@drawable/card_white_rounded"
+                            android:buttonTint="@color/navy_onserve"
+                            android:padding="15dp"
+                            android:text="No\nNo immediate danger"
+                            android:textColor="@color/navy_onserve" />
+                    </RadioGroup>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- Step 3: Review & Submit -->
+            <ScrollView
+                android:id="@+id/layout_step3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Information"
+                        android:textColor="@color/navy_onserve"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mobile Number"
+                            android:textColor="@color/text_gray"
+                            android:textSize="12sp" />
+
+                        <EditText
+                            android:id="@+id/et_phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:background="@android:color/transparent"
+                            android:hint="0912 345 6789"
+                            android:inputType="phone"
+                            android:textColor="@color/navy_onserve"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Location"
+                            android:textColor="@color/navy_onserve"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_edit_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="Edit"
+                            android:textColor="@color/blue_onserve"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_location_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Baguio City, Benguet\n(Detected by GPS)"
+                            android:textColor="@color/navy_onserve"
+                            android:textSize="14sp" />
+
+                        <!-- Map Container with Current Location Button -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="15dp">
+
+                            <androidx.fragment.app.FragmentContainerView
+                                android:id="@+id/map"
+                                android:name="com.google.android.gms.maps.SupportMapFragment"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                            <ImageButton
+                                android:id="@+id/btn_current_location"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_margin="10dp"
+                                android:background="@drawable/card_white_rounded"
+                                android:elevation="4dp"
+                                android:padding="8dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_my_location"
+                                app:tint="@color/navy_onserve" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <!-- Date & Time Section -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Date &amp; Time"
+                            android:textColor="@color/navy_onserve"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <CheckBox
+                            android:id="@+id/cb_asap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ASAP"
+                            android:textColor="@color/text_gray"
+                            android:textSize="12sp"
+                            android:buttonTint="@color/blue_onserve" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_date_time_pickers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <LinearLayout
+                            android:id="@+id/btn_select_date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Date"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tv_selected_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Select Date"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/btn_select_time_divider"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="15dp"
+                            android:background="@color/gray_border" />
+
+                        <LinearLayout
+                            android:id="@+id/btn_select_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Time"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tv_selected_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Select Time"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Buttons -->
+        <LinearLayout
+            android:id="@+id/layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <android.widget.Button
+                android:id="@+id/btn_back_cancel"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_white_rounded"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/navy_onserve" />
+
+            <android.widget.Button
+                android:id="@+id/btn_next_submit"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_weight="1.5"
+                android:background="@drawable/button_navy_rounded"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Full Screen Map Picker Overlay -->
+    <RelativeLayout
+        android:id="@+id/layout_full_map_picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/full_map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Search Bar -->
+        <LinearLayout
+            android:id="@+id/layout_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/bg_search_bar"
+            android:elevation="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:tint="@color/text_gray"
+                android:contentDescription="Search" />
+
+            <AutoCompleteTextView
+                android:id="@+id/et_map_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="Search location..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textSize="14sp"
+                android:completionThreshold="1"
+                android:popupBackground="@drawable/bg_dropdown"
+                android:dropDownVerticalOffset="4dp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_full_map_back"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/circle_white"
+            android:elevation="12dp"
+            android:translationZ="12dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_back_arrow"
+            android:clickable="true"
+            android:focusable="true"
+            app:tint="@color/navy_onserve" />
+
+        <!-- Zoom Controls -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btn_zoom_in"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/card_white_rounded"
+                android:elevation="4dp"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_input_add"
+                app:tint="@color/navy_onserve" />
+
+            <ImageButton
+                android:id="@+id/btn_zoom_out"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/card_white_rounded"
+                android:elevation="4dp"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_minus"
+                app:tint="@color/navy_onserve" />
+        </LinearLayout>
+
+        <android.widget.Button
+            android:id="@+id/btn_confirm_location"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/button_navy_rounded"
+            android:text="CONFIRM LOCATION"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:elevation="10dp"
+            android:translationZ="10dp" />
+
+        <ImageButton
+            android:id="@+id/btn_full_current_location"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@id/btn_confirm_location"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/card_white_rounded"
+            android:elevation="4dp"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_my_location"
+            app:tint="@color/navy_onserve" />
+    </RelativeLayout>
+
+</FrameLayout>

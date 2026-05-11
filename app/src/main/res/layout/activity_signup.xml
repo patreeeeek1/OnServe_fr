@@ -61,10 +61,15 @@
         </LinearLayout>
 
         <!-- Input Fields -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Full Name" android:layout_marginTop="20dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="First Name" android:layout_marginTop="20dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
         <EditText
-            android:id="@+id/et_signup_name"
-            android:layout_width="match_parent" android:layout_height="50dp" android:hint="Enter Name" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"/>
+            android:id="@+id/et_signup_first_name"
+            android:layout_width="match_parent" android:layout_height="50dp" android:hint="Enter First Name" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Last Name" android:layout_marginTop="15dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_signup_last_name"
+            android:layout_width="match_parent" android:layout_height="50dp" android:hint="Enter Last Name" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"/>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Email Address" android:layout_marginTop="15dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
         <EditText
@@ -72,8 +77,16 @@
             android:layout_width="match_parent" android:layout_height="50dp" android:hint="Enter Email" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"
             android:inputType="textEmailAddress"/>
 
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Phone Number" android:layout_marginTop="15dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_signup_phone"
+            android:layout_width="match_parent" android:layout_height="50dp" android:hint="Enter Phone Number" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"
+            android:inputType="phone"/>
+
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Address" android:layout_marginTop="15dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
-        <EditText android:layout_width="match_parent" android:layout_height="50dp" android:hint="Bakakeng Sur, 2600 Baguio City" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"/>
+        <EditText
+            android:id="@+id/et_signup_address"
+            android:layout_width="match_parent" android:layout_height="50dp" android:hint="Bakakeng Sur, 2600 Baguio City" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"/>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Password" android:layout_marginTop="15dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
         <EditText
@@ -82,6 +95,31 @@
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Confirm Password" android:layout_marginTop="15dp" android:textColor="@color/navy_onserve" android:textStyle="bold"/>
         <EditText android:layout_width="match_parent" android:layout_height="50dp" android:hint="********" android:inputType="textPassword" android:background="@drawable/input_rounded" android:paddingLeft="15dp" android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_agree_terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve" />
+
+            <TextView
+                android:id="@+id/tv_terms_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I agree to the terms &amp; conditions and privacy policy"
+                android:textColor="@color/navy_onserve"
+                android:textSize="13sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <android.widget.Button
             android:id="@+id/btn_signup_submit"
