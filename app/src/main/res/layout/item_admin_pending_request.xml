@@ -66,6 +66,16 @@
             android:text="User: patrick@email.com"
             android:textColor="@color/text_gray"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_admin_req_booked_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Booked: ASAP"
+            android:textColor="@color/blue_onserve"
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
@@ -197,7 +207,8 @@
             android:layout_height="wrap_content"
             android:text="P1: Emergency"
             android:textSize="12sp"
-            android:buttonTint="@color/red_emergency" />
+            android:buttonTint="@color/red_emergency"
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/rb_p2"
@@ -205,7 +216,8 @@
             android:layout_height="wrap_content"
             android:text="P2: Urgent"
             android:textSize="12sp"
-            android:buttonTint="@color/blue_onserve" />
+            android:buttonTint="@color/blue_onserve"
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/rb_p3"
@@ -213,8 +225,33 @@
             android:layout_height="wrap_content"
             android:text="P3: Routine"
             android:textSize="12sp"
-            android:buttonTint="@color/text_gray" />
+            android:buttonTint="@color/text_gray"
+            android:textColor="@color/black" />
     </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/layout_expertise_selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter Volunteer Expertise:"
+            android:textColor="@color/navy_onserve"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_expertise"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/input_rounded"
+            android:paddingHorizontal="10dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_sub_priority"

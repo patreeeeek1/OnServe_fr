@@ -60,6 +60,13 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         holder.tvPhone.setText(request.getPhoneNumber());
         holder.tvFullDescription.setText(request.getDescription());
 
+        if (request.getVolunteerName() != null && !request.getVolunteerName().isEmpty()) {
+            holder.tvAssignedVolunteer.setText("Assigned to: " + request.getVolunteerName());
+            holder.tvAssignedVolunteer.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvAssignedVolunteer.setVisibility(View.GONE);
+        }
+
         // Styling for Emergency
         if (request.isEmergency()) {
             holder.tvType.setTextColor(0xFFC62828); // red_emergency
@@ -78,26 +85,27 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
         });
 
         // Color status based on text
+        holder.tvStatus.setTextColor(android.graphics.Color.WHITE);
         if (request.getStatus().equals("Done")) {
-            holder.tvStatus.setTextColor(0xFF4CAF50); // Green
+            holder.tvStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF4CAF50)); // Green
             holder.btnDelete.setVisibility(View.GONE);
             holder.tvStatus.setBackgroundResource(R.drawable.card_selected_highlight);
         } else if (request.getStatus().equals("Assigned") || request.getStatus().equals("In Progress")) {
-            holder.tvStatus.setTextColor(0xFF2E7D32); // Dark Green
+            holder.tvStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF2E7D32)); // Dark Green
             holder.btnDelete.setVisibility(View.VISIBLE);
             holder.tvStatus.setBackgroundResource(R.drawable.card_selected_highlight);
         } else if (request.getStatus().equals("In Waiting Queue")) {
-            holder.tvStatus.setTextColor(0xFF26ACE1); // Blue
+            holder.tvStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF26ACE1)); // Blue
             holder.btnDelete.setVisibility(View.VISIBLE);
             holder.tvStatus.setBackgroundResource(R.drawable.card_selected_highlight);
         } else if (request.getStatus().equals("Pending Approval")) {
-            holder.tvStatus.setTextColor(0xFF666666); // Gray
+            holder.tvStatus.setTextColor(android.graphics.Color.DKGRAY);
             holder.btnDelete.setVisibility(View.VISIBLE);
-            holder.tvStatus.setBackgroundResource(R.drawable.card_selected_highlight);
+            holder.tvStatus.setBackgroundResource(R.drawable.card_white_rounded);
         } else {
-            holder.tvStatus.setTextColor(0xFF666666); // Gray
+            holder.tvStatus.setTextColor(android.graphics.Color.DKGRAY);
             holder.btnDelete.setVisibility(View.VISIBLE);
-            holder.tvStatus.setBackgroundResource(R.drawable.card_selected_highlight);
+            holder.tvStatus.setBackgroundResource(R.drawable.card_white_rounded);
         }
 
         holder.btnDelete.setOnClickListener(v -> {
@@ -113,7 +121,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
     }
 
     public static class RequestViewHolder extends RecyclerView.ViewHolder {
-        TextView tvType, tvStatus, tvDescription, tvLocation, tvDate, tvEmergencyBadge;
+        TextView tvType, tvStatus, tvDescription, tvLocation, tvDate, tvEmergencyBadge, tvAssignedVolunteer;
         TextView tvPhone, tvFullDescription, btnShowMore, tvUserName, tvEmailAddr, tvSubmittedDate;
         ImageView btnDelete;
         LinearLayout layoutDetails;
@@ -124,6 +132,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.Reques
             tvStatus = itemView.findViewById(R.id.tv_request_status);
             tvEmergencyBadge = itemView.findViewById(R.id.tv_emergency_badge);
             tvDescription = itemView.findViewById(R.id.tv_request_description);
+            tvAssignedVolunteer = itemView.findViewById(R.id.tv_assigned_volunteer);
             tvLocation = itemView.findViewById(R.id.tv_request_location);
             tvDate = itemView.findViewById(R.id.tv_request_date);
             

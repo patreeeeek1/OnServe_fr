@@ -72,7 +72,7 @@ class EditProfileActivity : AppCompatActivity() {
         db.collection("users").document(currentUserEmail!!).get()
             .addOnSuccessListener { document ->
                 if (document.exists()) {
-                    val currentVal = document.getString(fieldKey) ?: ""
+                    val currentVal = if (fieldKey == "password") "" else (document.getString(fieldKey) ?: "")
                     input.setText(currentVal)
                     input.setSelection(input.text.length)
                 }
@@ -81,11 +81,14 @@ class EditProfileActivity : AppCompatActivity() {
         builder.setView(container)
 
         builder.setPositiveButton("Update") { dialog, _ ->
-            val newValue = input.text.toString().trim()
+            var newValue = input.text.toString().trim()
             if (newValue.isNotEmpty()) {
                 if (fieldKey == "email") {
                     migrateUserEmail(newValue)
                 } else {
+                    if (fieldKey == "password") {
+                        newValue = HashUtils.sha256(newValue)
+                    }
                     updateField(fieldKey, newValue)
                 }
             } else {

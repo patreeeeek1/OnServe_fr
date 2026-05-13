@@ -55,6 +55,11 @@ public class RequestsActivity extends AppCompatActivity {
             finish();
         });
 
+        findViewById(R.id.nav_notifications).setOnClickListener(v -> {
+            startActivity(new Intent(this, NotificationCenterActivity.class));
+            finish();
+        });
+
         findViewById(R.id.nav_profile).setOnClickListener(v -> {
             startActivity(new Intent(this, ProfileActivity.class));
             finish();

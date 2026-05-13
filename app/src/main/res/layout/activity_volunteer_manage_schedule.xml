@@ -3,69 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray_bg">
+    android:background="@color/white">
 
+    <!-- Top AppBar -->
     <RelativeLayout
-        android:id="@+id/top_bar"
+        android:id="@+id/top_bar_manage"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/navy_onserve"
-        android:paddingHorizontal="20dp">
-
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:padding="8dp"
-            android:src="@drawable/ic_back_arrow"
-            app:tint="@color/white" />
+        android:paddingHorizontal="24dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Request History"
+            android:text="Manage Schedule"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/layout_date_selection"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_nav"
-        android:layout_below="@id/top_bar"
-        android:fillViewport="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_bar_manage"
+        android:orientation="vertical"
         android:padding="20dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Select Date"
+            android:textColor="@color/navy_onserve"
+            android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Completed Requests"
-                android:textColor="@color/navy_onserve"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_manage_selected_date"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/input_rounded"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:text="Choose a date"
+            android:textColor="@color/black"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:overScrollMode="never"
-                android:nestedScrollingEnabled="false" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_manage_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav_volunteer"
+        android:layout_below="@id/layout_date_selection"
+        android:paddingHorizontal="15dp"
+        android:clipToPadding="false"
+        android:paddingBottom="20dp" />
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/tv_no_availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No availability set for this date."
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <!-- Bottom Navigation Bar -->
     <LinearLayout
-        android:id="@+id/bottom_nav"
+        android:id="@+id/bottom_nav_volunteer"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
@@ -76,7 +85,7 @@
         android:paddingHorizontal="10dp">
 
         <LinearLayout
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_availability"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -92,13 +101,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Home"
+                android:text="Availability"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_requests"
+            android:id="@+id/nav_assignment_schedule"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -114,13 +123,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Requests"
+                android:text="Today"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_history"
+            android:id="@+id/nav_manage_schedule"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_messages"
+                app:tint="@color/navy_onserve" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule"
+                android:textColor="@color/navy_onserve"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_volunteer_history"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -132,17 +163,17 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@android:drawable/ic_menu_recent_history"
-                app:tint="@color/navy_onserve" />
+                app:tint="@color/text_gray" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="History"
-                android:textColor="@color/navy_onserve"
+                android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_notifications"
+            android:id="@+id/nav_notifications_volunteer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -164,7 +195,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_profile_volunteer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -186,5 +217,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </RelativeLayout>

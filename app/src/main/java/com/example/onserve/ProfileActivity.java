@@ -68,6 +68,11 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(new Intent(this, RequestHistoryActivity.class));
             finish();
         });
+
+        findViewById(R.id.nav_notifications).setOnClickListener(v -> {
+            startActivity(new Intent(this, NotificationCenterActivity.class));
+            finish();
+        });
     }
 
     private void loadUserData() {

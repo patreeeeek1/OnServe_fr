@@ -13,7 +13,7 @@
         android:paddingHorizontal="20dp">
 
         <ImageView
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_back_history"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
@@ -25,47 +25,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Request History"
+            android:text="Task History"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_volunteer_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_nav"
+        android:layout_above="@+id/bottom_nav_volunteer"
         android:layout_below="@id/top_bar"
-        android:fillViewport="true"
-        android:padding="20dp">
+        android:padding="16dp"
+        android:clipToPadding="false" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Completed Requests"
-                android:textColor="@color/navy_onserve"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:overScrollMode="never"
-                android:nestedScrollingEnabled="false" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/tv_empty_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No completed tasks yet."
+        android:textColor="@color/text_gray"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <!-- Bottom Navigation Bar -->
     <LinearLayout
-        android:id="@+id/bottom_nav"
+        android:id="@+id/bottom_nav_volunteer"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
@@ -76,7 +63,7 @@
         android:paddingHorizontal="10dp">
 
         <LinearLayout
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_availability"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -92,13 +79,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Home"
+                android:text="Availability"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_requests"
+            android:id="@+id/nav_assignment_schedule"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -114,13 +101,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Requests"
+                android:text="Today"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_history"
+            android:id="@+id/nav_manage_schedule"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_messages"
+                app:tint="@color/text_gray" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule"
+                android:textColor="@color/text_gray"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_volunteer_history"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -142,7 +151,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_notifications"
+            android:id="@+id/nav_notifications_volunteer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -164,7 +173,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_profile_volunteer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -48,13 +48,21 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Manually check central database for matching email and password
-            db.collection("users").document(inputEmail).get()
-                .addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val savedPassword = document.getString("password")
-                        if (savedPassword == inputPassword) {
-                            val user = document.toObject(User::class.java)
+                // Manually check central database for matching email and password
+                db.collection("users").document(inputEmail).get()
+                    .addOnSuccessListener { document ->
+                        if (document.exists()) {
+                            val savedPassword = document.getString("password")
+                            val inputHash = HashUtils.sha256(inputPassword)
+                            
+                            // Check for both hashed and plain text for backward compatibility
+                            if (savedPassword == inputPassword || savedPassword == inputHash) {
+                                // If plain text matched, migrate to hash automatically
+                                if (savedPassword == inputPassword && savedPassword != inputHash) {
+                                    db.collection("users").document(inputEmail).update("password", inputHash)
+                                }
+                                
+                                val user = document.toObject(User::class.java)
                             if (user != null) {
                                 // Remember current user email for this session
                                 val prefs = getSharedPreferences("OnServePrefs", MODE_PRIVATE)

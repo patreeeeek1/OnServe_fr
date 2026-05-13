@@ -51,6 +51,11 @@ public class DashboardActivity extends AppCompatActivity {
         final CheckBox cbDelivery = findViewById(R.id.cb_delivery);
         final CheckBox cbDebris = findViewById(R.id.cb_debris);
         final CheckBox cbCommunications = findViewById(R.id.cb_communications);
+        final CheckBox cbFireSafety = findViewById(R.id.cb_fire_safety);
+        final CheckBox cbSearchRescue = findViewById(R.id.cb_search_rescue);
+        final CheckBox cbCounseling = findViewById(R.id.cb_counseling);
+        final CheckBox cbAnimalHandling = findViewById(R.id.cb_animal_handling);
+        final CheckBox cbSecurity = findViewById(R.id.cb_security);
         final CheckBox cbOthers = findViewById(R.id.cb_others);
 
         final EditText etOtherExpertise = findViewById(R.id.et_other_expertise);
@@ -80,6 +85,11 @@ public class DashboardActivity extends AppCompatActivity {
         cbDelivery.setOnCheckedChangeListener(backgroundUpdater);
         cbDebris.setOnCheckedChangeListener(backgroundUpdater);
         cbCommunications.setOnCheckedChangeListener(backgroundUpdater);
+        cbFireSafety.setOnCheckedChangeListener(backgroundUpdater);
+        cbSearchRescue.setOnCheckedChangeListener(backgroundUpdater);
+        cbCounseling.setOnCheckedChangeListener(backgroundUpdater);
+        cbAnimalHandling.setOnCheckedChangeListener(backgroundUpdater);
+        cbSecurity.setOnCheckedChangeListener(backgroundUpdater);
 
         cbOthers.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -113,6 +123,11 @@ public class DashboardActivity extends AppCompatActivity {
                 if (cbDelivery.isChecked()) expertise.append("Delivery & Distribution;");
                 if (cbDebris.isChecked()) expertise.append("Debris Cleaning;");
                 if (cbCommunications.isChecked()) expertise.append("Communications;");
+                if (cbFireSafety.isChecked()) expertise.append("Fire Safety;");
+                if (cbSearchRescue.isChecked()) expertise.append("Search & Rescue;");
+                if (cbCounseling.isChecked()) expertise.append("Counseling;");
+                if (cbAnimalHandling.isChecked()) expertise.append("Animal Handling;");
+                if (cbSecurity.isChecked()) expertise.append("Security;");
                 
                 if (cbOthers.isChecked()) {
                     String other = etOtherExpertise.getText().toString().trim();
@@ -129,7 +144,8 @@ public class DashboardActivity extends AppCompatActivity {
                     return;
                 }
 
-                User volunteer = new User(name, email, password, "Volunteer", phone, address, expertise.toString());
+                String hashedPassword = HashUtils.sha256(password);
+                User volunteer = new User(name, email, hashedPassword, "Volunteer", phone, address, expertise.toString());
                 saveVolunteerToFirestore(email, volunteer);
             }
         });

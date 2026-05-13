@@ -17,9 +17,29 @@ public class SuccessActivity extends AppCompatActivity {
         btnGoToDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SuccessActivity.this, UserHomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+                String userEmail = getSharedPreferences("OnServePrefs", MODE_PRIVATE).getString("USER_EMAIL", "");
+                if (userEmail.isEmpty()) {
+                    finish();
+                    return;
+                }
+
+                com.google.firebase.firestore.FirebaseFirestore.getInstance().collection("users").document(userEmail).get()
+                        .addOnSuccessListener(documentSnapshot -> {
+                            Intent intent;
+                            String type = documentSnapshot.getString("type");
+                            if ("Volunteer".equals(type)) {
+                                intent = new Intent(SuccessActivity.this, VolunteerHomeActivity.class);
+                            } else {
+                                intent = new Intent(SuccessActivity.this, UserHomeActivity.class);
+                            }
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        })
+                        .addOnFailureListener(e -> {
+                            Intent intent = new Intent(SuccessActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        });
             }
         });
     }

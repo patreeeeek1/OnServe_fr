@@ -35,8 +35,11 @@
         <activity android:name=".AdminHistoryActivity" />
         <activity android:name=".VolunteerHomeActivity" />
         <activity android:name=".AssignmentScheduleActivity" />
+        <activity android:name=".VolunteerManageScheduleActivity" />
         <activity android:name=".VolunteerProfileActivity" />
         <activity android:name=".VolunteerListActivity" />
+        <activity android:name=".VolunteerHistoryActivity" />
+        <activity android:name=".NotificationCenterActivity" />
         <activity android:name=".RequestHistoryActivity" />
         <activity android:name=".AvailableTasksActivity" />
         <activity android:name=".ActiveTasksActivity" />

@@ -186,6 +186,7 @@ class VolunteerHomeActivity : AppCompatActivity() {
             .set(data)
             .addOnSuccessListener {
                 DialogUtils.showSuccessDialog(this, "Availability updated for $date!")
+                NotificationUtils.sendNotification(email, "Availability Updated", "Your availability for $date has been successfully saved.")
                 // Trigger queue check for each slot
                 selectedSlots.forEach { hour ->
                     checkWaitingQueueForSlot(email, date, hour)
@@ -266,10 +267,29 @@ class VolunteerHomeActivity : AppCompatActivity() {
 
         findViewById<LinearLayout>(R.id.nav_assignment_schedule).setOnClickListener {
             startActivity(Intent(this, AssignmentScheduleActivity::class.java))
+            finish()
+        }
+
+        findViewById<LinearLayout>(R.id.nav_manage_schedule).setOnClickListener {
+            startActivity(Intent(this, VolunteerManageScheduleActivity::class.java))
+            finish()
+        }
+
+        findViewById<LinearLayout>(R.id.nav_volunteer_history).setOnClickListener {
+            startActivity(Intent(this, VolunteerHistoryActivity::class.java))
+        }
+
+        findViewById<LinearLayout>(R.id.nav_volunteer_history).setOnClickListener {
+            startActivity(Intent(this, VolunteerHistoryActivity::class.java))
+        }
+
+        findViewById<LinearLayout>(R.id.nav_notifications_volunteer).setOnClickListener {
+            startActivity(Intent(this, NotificationCenterActivity::class.java))
         }
 
         findViewById<LinearLayout>(R.id.nav_profile_volunteer).setOnClickListener {
             startActivity(Intent(this, VolunteerProfileActivity::class.java))
+            finish()
         }
     }
 

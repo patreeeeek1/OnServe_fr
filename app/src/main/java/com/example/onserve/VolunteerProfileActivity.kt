@@ -2,12 +2,11 @@ package com.example.onserve
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -17,6 +16,8 @@ class VolunteerProfileActivity : AppCompatActivity() {
     private lateinit var tvEmail: TextView
     private lateinit var tvPhone: TextView
     private lateinit var tvAddress: TextView
+    private lateinit var tvExpertise: TextView
+    private var expertiseList: List<String> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,7 @@ class VolunteerProfileActivity : AppCompatActivity() {
         tvEmail = findViewById(R.id.tv_profile_email)
         tvPhone = findViewById(R.id.tv_profile_phone)
         tvAddress = findViewById(R.id.tv_profile_address)
+        tvExpertise = findViewById(R.id.tv_profile_expertise)
 
         findViewById<ImageView>(R.id.btn_back_profile).setOnClickListener { finish() }
 
@@ -41,6 +43,12 @@ class VolunteerProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        tvExpertise.setOnClickListener {
+            if (expertiseList.isNotEmpty()) {
+                showExpertiseDialog()
+            }
+        }
+
         // Bottom Navigation
         findViewById<LinearLayout>(R.id.nav_availability).setOnClickListener {
             val intent = Intent(this, VolunteerHomeActivity::class.java)
@@ -54,11 +62,32 @@ class VolunteerProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        findViewById<LinearLayout>(R.id.nav_manage_schedule).setOnClickListener {
+            startActivity(Intent(this, VolunteerManageScheduleActivity::class.java))
+            finish()
+        }
+
+        findViewById<LinearLayout>(R.id.nav_volunteer_history).setOnClickListener {
+            startActivity(Intent(this, VolunteerHistoryActivity::class.java))
+        }
+
+        findViewById<LinearLayout>(R.id.nav_notifications_volunteer).setOnClickListener {
+            startActivity(Intent(this, NotificationCenterActivity::class.java))
+        }
+
         findViewById<LinearLayout>(R.id.nav_profile_volunteer).setOnClickListener {
             // Already here
         }
 
         loadUserData()
+    }
+
+    private fun showExpertiseDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("My Areas of Expertise")
+            .setItems(expertiseList.toTypedArray(), null)
+            .setPositiveButton("Close", null)
+            .show()
     }
 
     private fun loadUserData() {
@@ -74,6 +103,13 @@ class VolunteerProfileActivity : AppCompatActivity() {
                         tvEmail.text = user.email
                         tvPhone.text = user.phone
                         tvAddress.text = user.address
+
+                        expertiseList = user.expertise.split(";").filter { it.isNotBlank() }
+                        if (expertiseList.isNotEmpty()) {
+                            tvExpertise.text = "${expertiseList[0]}${if (expertiseList.size > 1) " +${expertiseList.size - 1} more" else ""}"
+                        } else {
+                            tvExpertise.text = "No expertise set"
+                        }
                     }
                 }
             }

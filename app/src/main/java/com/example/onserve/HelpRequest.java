@@ -17,9 +17,13 @@ public class HelpRequest {
     private boolean emergency;
     private String scheduledDate;
     private String scheduledTime;
+    private String volunteerName;
 
     // No-argument constructor required for Firestore
     public HelpRequest() {}
+
+    public String getVolunteerName() { return volunteerName; }
+    public void setVolunteerName(String volunteerName) { this.volunteerName = volunteerName; }
 
     public String getScheduledDate() { return scheduledDate; }
     public void setScheduledDate(String scheduledDate) { this.scheduledDate = scheduledDate; }

@@ -54,6 +54,19 @@ class AssignmentScheduleActivity : AppCompatActivity() {
             // Already here
         }
 
+        findViewById<LinearLayout>(R.id.nav_manage_schedule).setOnClickListener {
+            startActivity(Intent(this, VolunteerManageScheduleActivity::class.java))
+            finish()
+        }
+
+        findViewById<LinearLayout>(R.id.nav_volunteer_history).setOnClickListener {
+            startActivity(Intent(this, VolunteerHistoryActivity::class.java))
+        }
+
+        findViewById<LinearLayout>(R.id.nav_notifications_volunteer).setOnClickListener {
+            startActivity(Intent(this, NotificationCenterActivity::class.java))
+        }
+
         findViewById<LinearLayout>(R.id.nav_profile_volunteer).setOnClickListener {
             startActivity(Intent(this, VolunteerProfileActivity::class.java))
             finish()
@@ -98,10 +111,19 @@ class AssignmentScheduleActivity : AppCompatActivity() {
     }
 
     private fun completeTask(docId: String) {
-        db.collection("requests").document(docId).update("status", "Done")
-            .addOnSuccessListener {
-                Toast.makeText(this, "Task completed!", Toast.LENGTH_SHORT).show()
-            }
+        db.collection("requests").document(docId).get().addOnSuccessListener { snapshot ->
+            val userEmail = snapshot.getString("userEmail") ?: ""
+            val taskType = snapshot.getString("type") ?: ""
+            val volunteerName = snapshot.getString("volunteerName") ?: "The volunteer"
+            
+            db.collection("requests").document(docId).update("status", "Done")
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Task completed!", Toast.LENGTH_SHORT).show()
+                    if (userEmail.isNotEmpty()) {
+                        NotificationUtils.sendNotification(userEmail, "Service Completed", "$volunteerName has marked your $taskType request as completed.")
+                    }
+                }
+        }
     }
 }
 
@@ -114,10 +136,12 @@ class ScheduleAdapter(
         val tvPriority: TextView = v.findViewById(R.id.tv_task_priority)
         val tvType: TextView = v.findViewById(R.id.tv_task_type)
         val tvDesc: TextView = v.findViewById(R.id.tv_task_desc)
-        val tvScheduledDate: TextView = v.findViewById(R.id.tv_task_submitted_date) // Reusing ID for simplicity
+        val tvScheduledDate: TextView = v.findViewById(R.id.tv_task_submitted_date)
         val tvName: TextView = v.findViewById(R.id.tv_task_user_name)
         val tvLocation: TextView = v.findViewById(R.id.tv_task_location)
-        val btnComplete: Button = v.findViewById(R.id.btn_accept_task) // Reusing ID, changing text
+        val btnComplete: Button = v.findViewById(R.id.btn_accept_task)
+        val btnShowMore: TextView = v.findViewById(R.id.btn_task_show_more)
+        val layoutDetails: View = v.findViewById(R.id.layout_task_details)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -144,8 +168,23 @@ class ScheduleAdapter(
             if (docId != null) onCompleteClick(docId)
         }
 
+        // Hide "Mark Done" if already finished
+        val status = item["status"] as? String ?: ""
+        if (status == "Done") {
+            holder.btnComplete.visibility = View.GONE
+        } else {
+            holder.btnComplete.visibility = View.VISIBLE
+        }
+
+        holder.btnShowMore.setOnClickListener {
+            val isVisible = holder.layoutDetails.visibility == View.VISIBLE
+            holder.layoutDetails.visibility = if (isVisible) View.GONE else View.VISIBLE
+            holder.btnShowMore.text = if (isVisible) "Show more" else "Show less"
+        }
+
         // Color coding priority
         val priority = item["priority"] as? String ?: ""
+        holder.tvPriority.setTextColor(android.graphics.Color.WHITE)
         when {
             priority.contains("P1") -> holder.tvPriority.backgroundTintList = android.content.res.ColorStateList.valueOf(0xFFC62828.toInt())
             priority.contains("P2") -> holder.tvPriority.backgroundTintList = android.content.res.ColorStateList.valueOf(0xFFFFBF00.toInt())

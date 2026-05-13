@@ -85,8 +85,12 @@ class SignupActivity : AppCompatActivity() {
                 }
 
                 val fullName = "$firstName $lastName"
-                val user = User(fullName, email, password, if (isVolunteer) "Volunteer" else "User", phone, address)
+                val hashedPassword = HashUtils.sha256(password)
+                val user = User(fullName, email, hashedPassword, if (isVolunteer) "Volunteer" else "User", phone, address)
                 
+                // Save email for session consistency
+                getSharedPreferences("OnServePrefs", MODE_PRIVATE).edit().putString("USER_EMAIL", email).apply()
+
                 // Use email as the unique ID for simplicity without Auth UID
                 if (isVolunteer) {
                     val intent = Intent(this, DashboardActivity::class.java)

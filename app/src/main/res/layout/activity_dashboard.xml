@@ -190,6 +190,81 @@
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Communications" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_fire_safety"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fire Safety" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_search_rescue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Search &amp; Rescue" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_counseling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Counseling" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_animal_handling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Animal Handling" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/card_selection_bg"
+            android:gravity="center_vertical"
+            android:padding="15dp"
+            android:layout_marginBottom="15dp">
+            <CheckBox
+                android:id="@+id/cb_security"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/navy_onserve"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Security" android:textSize="20sp" android:textColor="@color/navy_onserve" android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
         <!-- Others Checkbox -->
         <LinearLayout
             android:layout_width="match_parent"

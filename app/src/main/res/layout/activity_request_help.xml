@@ -332,7 +332,7 @@
                         <ImageView
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:background="@drawable/bg_icon_other"
+                            android:background="@drawable/bg_icon_extraction"
                             android:padding="10dp"
                             android:src="@drawable/ic_location"
                             app:tint="@color/white" />
@@ -355,6 +355,246 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Blocked roads or damaged vehicle; need transport"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_fire"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_fire"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_emergency"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fire / Hazmat"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Small fires, smoke, or hazardous material"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_rescue"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_rescue"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_location"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Search &amp; Rescue"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Trapped individuals or extraction needed"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_water"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_water"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_location"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Water Supply"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Clean drinking water or large leak flooding"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_animal"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_animal"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_other"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Animal Handling"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Injured pets, strays, or livestock rescue"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_info"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_profile"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Information Request"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Aid, evacuation, or family tracking info"
+                                android:textColor="@color/text_gray"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/option_waste"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/card_white_rounded"
+                        android:gravity="center_vertical"
+                        android:padding="15dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/bg_icon_waste"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_delete"
+                            app:tint="@color/white" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Waste &amp; Biohazard"
+                                android:textColor="@color/navy_onserve"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Hazardous materials or waste disposal"
                                 android:textColor="@color/text_gray"
                                 android:textSize="12sp" />
                         </LinearLayout>

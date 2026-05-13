@@ -29,6 +29,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -79,8 +81,8 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
     private AutoCompleteTextView etMapSearch;
     private CheckBox cbAsap;
     private android.widget.RadioButton rbDangerYes;
-    
-    private LinearLayout optionElectrical, optionPlumbing, optionStructural, optionFood, optionMedical, optionWelfare, optionTransport, optionOther;
+
+    private LinearLayout optionElectrical, optionPlumbing, optionStructural, optionFood, optionMedical, optionWelfare, optionTransport, optionOther, optionFire, optionRescue, optionWater, optionAnimal, optionInfo, optionWaste;
 
     private GoogleMap mMap, mFullMap;
     private FusedLocationProviderClient fusedLocationClient;
@@ -121,7 +123,7 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
         
         tvSelectedDate = findViewById(R.id.tv_selected_date);
         tvSelectedTime = findViewById(R.id.tv_selected_time);
-        
+
         layoutStep1 = findViewById(R.id.layout_step1);
         layoutStep2 = findViewById(R.id.layout_step2);
         layoutStep3 = findViewById(R.id.layout_step3);
@@ -139,8 +141,6 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
         
         btnSelectDate = findViewById(R.id.btn_select_date);
         btnSelectTime = findViewById(R.id.btn_select_time);
-        btnSelectTime.setVisibility(View.GONE);
-        findViewById(R.id.btn_select_time_divider).setVisibility(View.GONE);
         
         etPhone = findViewById(R.id.et_phone_number);
         etOtherProblem = findViewById(R.id.et_other_problem_step1);
@@ -157,6 +157,12 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
         optionWelfare = findViewById(R.id.option_welfare);
         optionTransport = findViewById(R.id.option_transport);
         optionOther = findViewById(R.id.option_other);
+        optionFire = findViewById(R.id.option_fire);
+        optionRescue = findViewById(R.id.option_rescue);
+        optionWater = findViewById(R.id.option_water);
+        optionAnimal = findViewById(R.id.option_animal);
+        optionInfo = findViewById(R.id.option_info);
+        optionWaste = findViewById(R.id.option_waste);
 
         // Initialize Location Services
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -251,6 +257,12 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
                 else if (v.getId() == R.id.option_welfare) selectOption("WELFARE");
                 else if (v.getId() == R.id.option_transport) selectOption("TRANSPORT");
                 else if (v.getId() == R.id.option_other) selectOption("OTHER");
+                else if (v.getId() == R.id.option_fire) selectOption("FIRE");
+                else if (v.getId() == R.id.option_rescue) selectOption("RESCUE");
+                else if (v.getId() == R.id.option_water) selectOption("WATER");
+                else if (v.getId() == R.id.option_animal) selectOption("ANIMAL");
+                else if (v.getId() == R.id.option_info) selectOption("INFO");
+                else if (v.getId() == R.id.option_waste) selectOption("WASTE");
             }
         };
 
@@ -262,6 +274,12 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
         optionWelfare.setOnClickListener(optionListener);
         optionTransport.setOnClickListener(optionListener);
         optionOther.setOnClickListener(optionListener);
+        optionFire.setOnClickListener(optionListener);
+        optionRescue.setOnClickListener(optionListener);
+        optionWater.setOnClickListener(optionListener);
+        optionAnimal.setOnClickListener(optionListener);
+        optionInfo.setOnClickListener(optionListener);
+        optionWaste.setOnClickListener(optionListener);
 
         tvEditLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -351,10 +369,14 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
         cbAsap.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 tvSelectedDate.setText("ASAP");
-                // tvSelectedTime.setText("ASAP");
+                tvSelectedTime.setText("ASAP");
+                btnSelectTime.setVisibility(View.GONE);
+                findViewById(R.id.btn_select_time_divider).setVisibility(View.GONE);
             } else {
                 tvSelectedDate.setText("Select Date");
-                // tvSelectedTime.setText("Select Time");
+                tvSelectedTime.setText("Select Time");
+                btnSelectTime.setVisibility(View.VISIBLE);
+                findViewById(R.id.btn_select_time_divider).setVisibility(View.VISIBLE);
             }
         });
 
@@ -374,11 +396,19 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
                     }
                     goToStep(3);
                 } else if (currentStep == 3) {
-                    if (!isEmergency && !cbAsap.isChecked() && (tvSelectedDate.getText().toString().equals("Select Date"))) {
-                        showInfoDialog("Select Date", "Please select a preferred date for the service.");
-                        return;
+                    if (!isEmergency && !cbAsap.isChecked()) {
+                        if (tvSelectedDate.getText().toString().equals("Select Date")) {
+                            showInfoDialog("Select Date", "Please select a preferred date for the service.");
+                            return;
+                        }
+                        if (selectedMinutes == -1) {
+                            showInfoDialog("Select Time", "Please select an available time slot from the list.");
+                            return;
+                        }
+                        checkAvailabilityAndProceed();
+                    } else {
+                        saveRequestToFirestore();
                     }
-                    saveRequestToFirestore();
                 }
             }
         });
@@ -471,6 +501,9 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
                     selectedCalendar.set(Calendar.MONTH, monthOfYear);
                     selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                     
+                    selectedMinutes = -1;
+                    tvSelectedTime.setText("Select Time");
+                    
                     SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
                     tvSelectedDate.setText(sdf.format(selectedCalendar.getTime()));
                 }, year, month, day);
@@ -535,6 +568,12 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
         optionWelfare.setBackgroundResource(R.drawable.card_white_rounded);
         optionTransport.setBackgroundResource(R.drawable.card_white_rounded);
         optionOther.setBackgroundResource(R.drawable.card_white_rounded);
+        optionFire.setBackgroundResource(R.drawable.card_white_rounded);
+        optionRescue.setBackgroundResource(R.drawable.card_white_rounded);
+        optionWater.setBackgroundResource(R.drawable.card_white_rounded);
+        optionAnimal.setBackgroundResource(R.drawable.card_white_rounded);
+        optionInfo.setBackgroundResource(R.drawable.card_white_rounded);
+        optionWaste.setBackgroundResource(R.drawable.card_white_rounded);
         
         etOtherProblem.setVisibility(View.GONE);
 
@@ -559,6 +598,24 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
                 break;
             case "TRANSPORT":
                 optionTransport.setBackgroundResource(R.drawable.card_selected_highlight);
+                break;
+            case "FIRE":
+                optionFire.setBackgroundResource(R.drawable.card_selected_highlight);
+                break;
+            case "RESCUE":
+                optionRescue.setBackgroundResource(R.drawable.card_selected_highlight);
+                break;
+            case "WATER":
+                optionWater.setBackgroundResource(R.drawable.card_selected_highlight);
+                break;
+            case "ANIMAL":
+                optionAnimal.setBackgroundResource(R.drawable.card_selected_highlight);
+                break;
+            case "INFO":
+                optionInfo.setBackgroundResource(R.drawable.card_selected_highlight);
+                break;
+            case "WASTE":
+                optionWaste.setBackgroundResource(R.drawable.card_selected_highlight);
                 break;
             case "OTHER":
                 optionOther.setBackgroundResource(R.drawable.card_selected_highlight);
@@ -599,8 +656,17 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
                 layoutStep3.setVisibility(View.VISIBLE);
                 if (isEmergency) {
                     tvStepIndicator.setText("Emergency Step");
+                    btnSelectTime.setVisibility(View.GONE);
+                    findViewById(R.id.btn_select_time_divider).setVisibility(View.GONE);
                 } else {
                     tvStepIndicator.setText("Step 3 of 3");
+                    if (cbAsap.isChecked()) {
+                        btnSelectTime.setVisibility(View.GONE);
+                        findViewById(R.id.btn_select_time_divider).setVisibility(View.GONE);
+                    } else {
+                        btnSelectTime.setVisibility(View.VISIBLE);
+                        findViewById(R.id.btn_select_time_divider).setVisibility(View.VISIBLE);
+                    }
                 }
                 tvStepTitle.setText("Review & Submit");
                 btnBackCancel.setText("Back");
@@ -694,6 +760,84 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
         });
     }
 
+    private void checkAvailabilityAndProceed() {
+        String date = tvSelectedDate.getText().toString();
+        // Convert "MMM dd, yyyy" to "yyyy-MM-dd" for querying availability
+        String searchDate = date;
+        try {
+            SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
+            SimpleDateFormat searchFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            java.util.Date d = displayFormat.parse(date);
+            if (d != null) searchDate = searchFormat.format(d);
+        } catch (Exception e) {
+            searchDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new java.util.Date());
+        }
+
+        final String finalSearchDate = searchDate;
+
+        FirebaseFirestore.getInstance().collection("users")
+                .whereEqualTo("type", "Volunteer")
+                .get()
+                .addOnSuccessListener(volunteers -> {
+                    List<com.google.firebase.firestore.DocumentSnapshot> qualified = new ArrayList<>();
+                    for (com.google.firebase.firestore.DocumentSnapshot doc : volunteers.getDocuments()) {
+                        String expertise = doc.getString("expertise");
+                        if (expertise != null && expertise.toUpperCase().contains(selectedType.toUpperCase())) {
+                            qualified.add(doc);
+                        }
+                    }
+
+                    if (qualified.isEmpty()) {
+                        showAvailabilityDialog();
+                    } else {
+                        checkVolunteerSlots(qualified, finalSearchDate, 0);
+                    }
+                });
+    }
+
+    private void checkVolunteerSlots(List<com.google.firebase.firestore.DocumentSnapshot> volunteers, String date, int index) {
+        if (index >= volunteers.size()) {
+            showAvailabilityDialog();
+            return;
+        }
+
+        String email = volunteers.get(index).getId();
+        FirebaseFirestore.getInstance().collection("volunteer_availability").document(email + "_" + date).get()
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        Object slotsObj = doc.get("slots");
+                        if (slotsObj instanceof List) {
+                            List<?> slotsList = (List<?>) slotsObj;
+                            for (Object hourObj : slotsList) {
+                                if (hourObj instanceof Long) {
+                                    int hour = ((Long) hourObj).intValue();
+                                    int slotStart = hour * 60;
+                                    int slotEnd = (hour + 1) * 60;
+                                    if (Math.abs(selectedMinutes - slotStart) <= 45 || Math.abs(selectedMinutes - slotEnd) <= 45 || (selectedMinutes >= slotStart && selectedMinutes <= slotEnd)) {
+                                        saveRequestToFirestore();
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    checkVolunteerSlots(volunteers, date, index + 1);
+                });
+    }
+
+    private void showAvailabilityDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("No Direct Match Found")
+                .setMessage("There are no available volunteers within 45 minutes of your selected time. Would you like to reschedule or stay on the waiting list?")
+                .setPositiveButton("Reschedule", (dialog, which) -> {
+                    // Stay on Step 3 and let user change time
+                })
+                .setNegativeButton("Waitlist Me", (dialog, which) -> {
+                    saveRequestToFirestore();
+                })
+                .show();
+    }
+
     private void saveRequestToFirestore() {
         final String finalType;
         if (selectedType.equals("OTHER")) {
@@ -715,54 +859,7 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
             return;
         }
 
-        if (asap) {
-            // Skip availability check for emergencies
-            performSave(finalType, desc, loc, date, phone, isDanger, asap);
-        } else {
-            // Check if ANY volunteer is available for this date/time
-            checkAvailabilityAndSave(finalType, desc, loc, date, phone, isDanger, asap);
-        }
-    }
-
-    private void checkAvailabilityAndSave(String type, String desc, String loc, String date, String phone, boolean isDanger, boolean asap) {
-        // Convert display date to yyyy-MM-dd for searching in volunteer_availability
-        // tvSelectedDate uses MMM dd, yyyy
-        String searchDate = date;
-        try {
-            SimpleDateFormat displayFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
-            SimpleDateFormat searchFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-            java.util.Date d = displayFormat.parse(date);
-            if (d != null) searchDate = searchFormat.format(d);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        final String finalSearchDate = searchDate;
-        FirebaseFirestore.getInstance().collection("volunteer_availability")
-                .whereEqualTo("date", finalSearchDate)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    boolean someoneAvailable = false;
-                    for (com.google.firebase.firestore.DocumentSnapshot doc : queryDocumentSnapshots.getDocuments()) {
-                        Long start = doc.getLong("startMinutes");
-                        Long end = doc.getLong("endMinutes");
-                        if (start != null && end != null && selectedMinutes >= start && selectedMinutes <= end) {
-                            someoneAvailable = true;
-                            break;
-                        }
-                    }
-
-                    if (someoneAvailable) {
-                        performSave(type, desc, loc, date, phone, isDanger, asap);
-                    } else {
-                        new AlertDialog.Builder(this)
-                            .setTitle("No Volunteers Available")
-                            .setMessage("There are no volunteers available at your selected date and time. Would you like to reschedule or submit anyway (it might take longer)?")
-                            .setPositiveButton("Submit Anyway", (dialog, which) -> performSave(type, desc, loc, date, phone, isDanger, asap))
-                            .setNegativeButton("Reschedule", null)
-                            .show();
-                    }
-                });
+        performSave(finalType, desc, loc, date, phone, isDanger, asap);
     }
 
     private void performSave(String type, String desc, String loc, String date, String phone, boolean isDanger, boolean asap) {
@@ -787,13 +884,17 @@ public class RequestHelpActivity extends AppCompatActivity implements OnMapReady
                     request.put("date", date);
                     request.put("time", tvSelectedTime.getText().toString());
                     request.put("timeMinutes", selectedMinutes);
+                    request.put("slotHour", selectedMinutes != -1 ? selectedMinutes / 60 : -1);
                     request.put("phoneNumber", phone);
                     request.put("asap", asap);
                     request.put("emergency", isEmergency || isDanger);
                     request.put("timestamp", timestamp);
 
                     FirebaseFirestore.getInstance().collection("requests").add(request)
-                            .addOnSuccessListener(documentReference -> showSuccessDialog())
+                            .addOnSuccessListener(documentReference -> {
+                                NotificationUtils.INSTANCE.sendNotification(userEmail, "Request Submitted", "Your request for " + type + " has been submitted and is pending approval.");
+                                showSuccessDialog();
+                            })
                             .addOnFailureListener(e -> DialogUtils.INSTANCE.showErrorDialog(this, "Submission Failed", e.getMessage()));
                 });
     }

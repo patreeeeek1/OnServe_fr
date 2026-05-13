@@ -78,6 +78,14 @@ public class UserHomeActivity extends AppCompatActivity {
             startActivity(new Intent(this, RequestHistoryActivity.class));
         });
 
+        findViewById(R.id.nav_notifications).setOnClickListener(v -> {
+            startActivity(new Intent(this, NotificationCenterActivity.class));
+        });
+
+        findViewById(R.id.btn_notifications).setOnClickListener(v -> {
+            startActivity(new Intent(this, NotificationCenterActivity.class));
+        });
+
         navProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

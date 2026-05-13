@@ -54,6 +54,7 @@ class VolunteerAdapter(private val items: List<User>) : RecyclerView.Adapter<Vol
     class VH(v: View) : RecyclerView.ViewHolder(v) {
         val tvName: TextView = v.findViewById(R.id.tv_volunteer_name)
         val tvEmail: TextView = v.findViewById(R.id.tv_volunteer_email)
+        val tvExpertisePreview: TextView = v.findViewById(R.id.tv_volunteer_expertise_preview)
         val tvExpertise: TextView = v.findViewById(R.id.tv_volunteer_expertise)
         val tvPhone: TextView = v.findViewById(R.id.tv_volunteer_phone)
         val tvAddress: TextView = v.findViewById(R.id.tv_volunteer_address)
@@ -70,7 +71,11 @@ class VolunteerAdapter(private val items: List<User>) : RecyclerView.Adapter<Vol
         val user = items[position]
         holder.tvName.text = user.name
         holder.tvEmail.text = user.email
-        holder.tvExpertise.text = if (user.expertise.isEmpty()) "Not specified" else user.expertise
+        
+        val expText = if (user.expertise.isEmpty()) "Not specified" else user.expertise
+        holder.tvExpertisePreview.text = "Expertise: ${expText.split(";")[0]}"
+        holder.tvExpertise.text = expText
+
         holder.tvPhone.text = user.phone
         holder.tvAddress.text = user.address
 

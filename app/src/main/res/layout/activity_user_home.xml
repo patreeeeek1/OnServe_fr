@@ -48,13 +48,17 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/btn_notifications"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_notification"
             app:tint="@color/white"
-            android:visibility="gone" />
+            android:visibility="visible"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
     </RelativeLayout>
 
     <!-- Main Content -->
@@ -378,6 +382,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="History"
+                android:textColor="@color/text_gray"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/nav_notifications"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_notification"
+                app:tint="@color/text_gray" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notifications"
                 android:textColor="@color/text_gray"
                 android:textSize="10sp" />
         </LinearLayout>
