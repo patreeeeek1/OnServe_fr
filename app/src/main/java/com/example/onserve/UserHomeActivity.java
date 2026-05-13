@@ -15,7 +15,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 
-public class UserHomeActivity extends AppCompatActivity {
+public class UserHomeActivity extends BaseActivity {
 
     private ListenerRegistration connectionListener;
     private View connectionDot;

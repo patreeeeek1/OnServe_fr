@@ -27,6 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OnServe">
 
+        <activity android:name=".ProcessLifecycleActivity" />
         <activity android:name=".AdminDashboardActivity" />
         <activity android:name=".AdminPendingRequestsActivity" />
         <activity android:name=".AdminActiveRequestsActivity" />

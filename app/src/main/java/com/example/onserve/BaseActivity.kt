@@ -10,35 +10,40 @@ import androidx.appcompat.app.AppCompatActivity
  */
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected val lifecycleTag = "ProcessStateManagement"
+    protected val lifecycleTag = "OnServe_OS"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(lifecycleTag, "${this.javaClass.simpleName} [STATE: NEW] - Activity created, mapping to Process 'New' state.")
+        Log.d(lifecycleTag, "[PROCESS STATE: NEW] -> [STATE: READY] - ${this.javaClass.simpleName} created and resources allocated.")
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d(lifecycleTag, "${this.javaClass.simpleName} [STATE: READY] - Activity visible, mapping to Process 'Ready' state (Loaded in memory).")
+        Log.d(lifecycleTag, "[PROCESS STATE: READY] - ${this.javaClass.simpleName} is now visible and ready to run.")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(lifecycleTag, "${this.javaClass.simpleName} [STATE: RUNNING] - Activity focused, mapping to Process 'Running' state (Executing in CPU).")
+        Log.d(lifecycleTag, "[PROCESS STATE: RUNNING] - ${this.javaClass.simpleName} is executing in the CPU foreground.")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(lifecycleTag, "${this.javaClass.simpleName} [STATE: WAITING] - Activity losing focus, mapping to Process 'Waiting' state (Interrupted).")
+        Log.d(lifecycleTag, "[PROCESS STATE: RUNNING] -> [STATE: WAITING] - ${this.javaClass.simpleName} interrupted/losing focus.")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(lifecycleTag, "${this.javaClass.simpleName} [STATE: WAITING/READY] - Activity hidden, mapping to Process 'Waiting/Ready' (Swapped out of CPU).")
+        Log.d(lifecycleTag, "[PROCESS STATE: WAITING] - ${this.javaClass.simpleName} is backgrounded and waiting for CPU slot.")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(lifecycleTag, "[PROCESS STATE: WAITING] -> [STATE: READY] - ${this.javaClass.simpleName} returning from background.")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(lifecycleTag, "${this.javaClass.simpleName} [STATE: TERMINATED] - Activity destroyed, mapping to Process 'Terminated' state (Removed from memory).")
+        Log.d(lifecycleTag, "[PROCESS STATE: TERMINATED] - ${this.javaClass.simpleName} resources released from memory.")
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OS Concept: Process Lifecycle"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/navy_onserve" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="This activity demonstrates Android process states mapping to OS concepts. Check Logcat with tag 'OnServe_OS' to see state transitions."
+        android:textColor="@color/text_gray" />
+
+    <EditText
+        android:id="@+id/et_lifecycle_data"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="32dp"
+        android:hint="Type something to test persistence..."
+        android:paddingHorizontal="15dp"
+        android:background="@drawable/input_rounded" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Test Instructions:\n1. Rotate the screen.\n2. Enable 'Don't keep activities' in Developer Options.\n3. Observe logs for NEW, READY, RUNNING, WAITING, TERMINATED states."
+        android:textColor="@color/navy_onserve"
+        android:textStyle="italic" />
+
+</LinearLayout>

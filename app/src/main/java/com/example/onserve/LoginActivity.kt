@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +32,11 @@ class LoginActivity : AppCompatActivity() {
 
         tvAdminLogin.setOnClickListener {
             showAdminPasswordDialog()
+        }
+
+        findViewById<TextView>(R.id.tv_admin_login).setOnLongClickListener {
+            startActivity(Intent(this, ProcessLifecycleActivity::class.java))
+            true
         }
 
         btnSubmit.setOnClickListener {

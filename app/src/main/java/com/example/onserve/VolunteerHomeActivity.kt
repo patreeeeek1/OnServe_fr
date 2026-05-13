@@ -18,7 +18,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import java.text.SimpleDateFormat
 import java.util.*
 
-class VolunteerHomeActivity : AppCompatActivity() {
+class VolunteerHomeActivity : BaseActivity() {
 
     private var connectionListener: ListenerRegistration? = null
     private lateinit var connectionDot: View

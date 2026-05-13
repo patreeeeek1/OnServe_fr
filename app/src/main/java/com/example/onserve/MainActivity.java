@@ -14,13 +14,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "ProcessStateManagement";
+    private static final String TAG = "OnServe_OS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "MainActivity [STATE: NEW] - Activity created, mapping to Process 'New' state.");
+        Log.d(TAG, "[PROCESS STATE: NEW] -> [STATE: READY] - MainActivity created and resources allocated.");
 
         Button loginBtn = findViewById(R.id.loginButton);
         Button signupBtn = findViewById(R.id.signupButton);
@@ -57,31 +57,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "MainActivity [STATE: READY] - Activity started and visible, mapping to Process 'Ready' state.");
+        Log.d(TAG, "[PROCESS STATE: READY] - MainActivity is now visible.");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "MainActivity [STATE: RUNNING] - Activity has focus, mapping to Process 'Running' state.");
+        Log.d(TAG, "[PROCESS STATE: RUNNING] - MainActivity is executing in CPU foreground.");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG, "MainActivity [STATE: WAITING] - Activity losing focus, mapping to Process 'Waiting' state.");
+        Log.d(TAG, "[PROCESS STATE: RUNNING] -> [STATE: WAITING] - MainActivity losing focus.");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "[PROCESS STATE: WAITING] -> [STATE: READY] - MainActivity returning from background.");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "MainActivity [STATE: READY/WAITING] - Activity hidden, mapping to Process 'Ready/Waiting' (Ready to be swapped back).");
+        Log.d(TAG, "[PROCESS STATE: WAITING] - MainActivity is backgrounded.");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "MainActivity [STATE: TERMINATED] - Activity being destroyed, mapping to Process 'Terminated' state.");
+        Log.d(TAG, "[PROCESS STATE: TERMINATED] - MainActivity resources released.");
     }
 
     private void showAdminPasswordDialog() {

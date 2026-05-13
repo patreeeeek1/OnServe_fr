@@ -60,7 +60,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class RequestHelpActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class RequestHelpActivity extends BaseActivity implements OnMapReadyCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 300;
 
